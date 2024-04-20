@@ -1,0 +1,67 @@
+create table flight
+ (
+ flight_no int,
+ from_loc varchar(20),
+ to_loc varchar(20),
+ distance int,
+ price int
+ );
+create table aircraft
+ (
+ aid int,
+ aname varchar(20),
+ cruisingrange int
+ );
+create table certified
+ (
+ eid int,
+ aid int
+ );
+create table employee
+ (
+ eid int,
+ ename varchar(20),
+ salary int
+ );
+
+INSERT INTO flight (flight_no,from_loc,to_loc,distance,price)
+VALUES
+    (222, 'Perth', 'London', 9000, 50000),
+    (333, 'Auckland', 'Dubai', 7000, 40000),
+    (444, 'Dallas', 'Sydney', 10000, 52000),
+    (555, 'LA', 'Singapore', 11000, 55000),
+    (666, 'UK', 'Atlanta', 15000, 60000);
+
+ 
+ insert into aircraft (aid,aname,cruisingrange)
+ values
+ 
+ (111, 'AD Scout',1000),
+ (112, 'Airco', 15000),
+ (113, 'Avis', 9000),
+ (114, 'Bernard', 8000),
+ (115, 'Comte', 20000);
+ 
+ insert into employee (eid,ename,salary)
+ values
+(100, 'Oliver', 85000),
+(101, 'Jack', 50000),
+(102, 'Thomas',89000),
+(103, 'George', 10000),
+(105, 'James', 90000),
+(106, 'Daneil', 100000),
+(107, 'Noah', 50000),
+ (108, 'Joe', 25000),
+(109, 'Pheebs', 90000),
+(110, 'Ross', 5000);
+
+
+insert into certified(eid,aid)
+ values
+  (100,114),
+  (102,113),
+  (105,112),
+  (106,115),
+  (107,111),
+  (108,112);
+ 
