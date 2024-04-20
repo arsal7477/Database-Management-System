@@ -64,4 +64,46 @@ insert into certified(eid,aid)
   (106,115),
   (107,111),
   (108,112);
+
+----output sum of price from table flight-----
+select  sum(price)
+from flight ;
  
+ --- selecting emplyee names in ascending order------
+ 
+ select ename from employee order by ename asc;
+ select * from employee;
+ 
+ ----selecting employee names and there salaries-----
+ select ename ,sum(salary/100 * 10) from employee
+ group by ename ;
+ 
+ -----selecting employee names and there salaries whose name starts from T------
+ 
+  select ename ,sum(salary/100 * 10) from employee
+ where ename like ('T%') group by ename ;
+ 
+-----selecting flight locations and ther prices---------
+
+select from_loc,sum(price) from flight group by from_loc;
+
+
+ -----selecting employee names and there salaries whose name starts from J and ----
+ ---------------salary is graeter tna 20000-----
+ 
+select ename,sum(salary) from employee where ename like 'J%' and salary>20000 
+group by ename, salary;
+
+-----sum salaries of employees whose name starts from J----
+
+SELECT SUM(SALARY) FROM EMPLOYEE WHERE ENAME LIKE 'J%' AND 
+SALARY>20000;
+
+
+---output total data from aircraft table ordered by cruisingrange----
+
+select * from aircraft order by cruisingrange asc;
+
+----- output total count of flight numbers------
+
+select  count(flight_no) from flight;
