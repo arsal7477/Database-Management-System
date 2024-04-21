@@ -1,0 +1,114 @@
+-- CREATE TABLE employees (
+--     id SERIAL PRIMARY KEY,
+--     name VARCHAR(100),
+--     age INT,
+--     department VARCHAR(100)
+-- );
+
+-- -- Insert some sample data
+-- INSERT INTO employees (name, age, department) VALUES 
+--     ('Alice', 30, 'HR'),
+--     ('Bob', 35, 'IT'),
+--     ('Charlie', 25, 'Marketing'),
+--     ('David', 40, 'Finance');
+
+--  INSERT INTO employees (name, age, department) VALUES 
+--     ('Ali', 30, 'IT'),
+--     ('B', 35, 'IT'),
+--     ('Cha', 25, 'IT'),
+--     ('Dav', 40, 'Finance');
+
+--  INSERT INTO employees (name, age, department) VALUES 
+--     ('A', 41, 'IT'),
+--     ('Bb', 45, 'IT'),
+--     ('C', 42, 'IT'),
+--     ('D', 40, 'Finance');
+
+
+-- ----Can you write a query to select employees from the
+-- ----IT department and increase their ages by 1 
+-- ----if they are younger than 40, otherwise leave their ages unchanged?
+
+-- do $$
+-- declare
+-- a_age int;
+-- empname varchar(50);
+-- oldage int;
+-- age_cursor cursor for
+-- select age,name from employees where department = 'IT';
+
+-- begin
+
+-- open age_cursor;
+
+-- fetch next from age_cursor into a_age,empname ;
+
+-- while found loop
+
+-- oldage:=a_age;
+
+-- if a_age < 35 then
+-- a_age :=a_age + 1;
+-- raise notice 'age of % changed from % to %', empname ,oldage,a_age;
+
+-- else
+-- a_age=a_age;
+-- raise notice 'age of % remains unchange ie age= %', empname, a_age;
+
+-- end if;
+-- fetch next from age_cursor into a_age,empname;
+
+-- end loop;
+
+-- close age_cursor;
+
+-- end $$;
+
+
+
+---- And here's an example question about case statements:
+---- Question: Write a query to select employees and display their ages along
+---- with a label indicating whether they are
+---- young (age < 30), middle-aged (30 <= age < 40), or senior (age >= 40).
+
+
+-- do $$
+
+-- declare 
+-- aage int;
+-- empname varchar(50);
+-- label text;
+-- curs cursor for
+--         select age,name from employees;
+
+-- begin
+
+-- open curs;
+
+-- fetch next from curs into aage,empname; 
+-- while found loop
+-- case 
+--  when aage < 30 then
+--  label :='young';
+ 
+ 
+-- WHEN aage >= 30 AND aage <= 40 THEN
+
+--  label :='middle aged';
+ 
+
+--  when aage > 40 then
+--  label :='old';
+--  end case;
+--  raise notice '% is %', empname , label;
+
+
+-- fetch next from curs into aage,empname;
+
+-- end loop;
+
+-- close curs;
+
+-- end $$;
+
+
