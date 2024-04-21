@@ -1,0 +1,110 @@
+
+----- simple block Syntax------
+-- do $$
+-- --- daclare name--
+-- declare << abc >>
+-- begin
+-- ----- logic----
+-- select count(*) into film_count
+-- from film;
+-- ---- rase notice for cout----
+-- ----% = value ahead
+-- raise notice 'my name is %' , namee;
+-- ---- end -----
+-- end abc $$;
+
+-----conditional statements syntax ------
+------if----
+-- do $$
+
+-- declare <<conditional>>
+-- select_films film%rowtype;
+-- input_id film.film_id%:=0;
+
+-- begin
+
+-- select * from films into
+-- select_film where film_id = input_id;
+
+-- if not found then
+
+-- raise notice 'film id % not found' , input_id;
+
+-- end if;
+
+-- end conditional $$;
+
+
+------if then else----------
+
+-- do $$
+
+-- declare <<conditional>>
+-- select_films film%rowtype;
+-- input_id film.film_id%:=0;
+
+-- begin
+
+-- select * from films into
+-- select_film where film_id = input_id;
+
+-- if not found then
+
+-- raise notice 'film id % not found' , input_id;
+
+-- else 
+
+-- raise notice 'film title id % ' ,select_film.film_title;
+
+-- end if;
+
+-- end conditional $$;
+
+
+--------if then elsif----
+
+-- do$$
+
+-- declare
+
+-- a_film film%rowtype;
+-- description varchar(40);
+-- begin
+-- select * from film where film_id = 100;
+
+-- if not found then 
+-- raise notice 'film  not found';
+
+-- else
+--  if a_film.length > 0 and a_film.length<50;
+--       then description:= 'short';
+	  
+-- 	  elsif a_film.length > 50 and a_film.length <100 then
+-- 	  description:='medium';
+	  
+-- 	  else description;= 'N/A';
+	  
+-- 	  end if;
+	  
+-- 	  raise notice 'the film % has description %', a_film.title,descripton;
+
+-- end if;
+
+-- end $$;
+
+------------------------while loop------------
+
+
+-- do $$
+-- <<abc>>
+-- declare 
+-- counter int :=0;
+
+-- begin 
+
+-- while counter < 5 loop
+--  raise notice 'counter % ', counter;
+--  counter :=counter+1;
+--  end loop;
+ 
+--  end abc $$
