@@ -1,0 +1,46 @@
+-- Create Department Table
+CREATE TABLE department(
+    dep_id INT PRIMARY KEY,
+    dep_name VARCHAR(20),
+    dep_location VARCHAR(30)
+);
+
+-- Create Salary Grade Table
+CREATE TABLE salary_grade(
+    grade INT PRIMARY KEY,
+    min_salary INT,
+    max_salary INT
+);
+
+-- Create Employees Table
+CREATE TABLE employees(
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(20),
+    jobname VARCHAR(15),
+    manager_id INT,
+    hire_date DATE,
+    salary DECIMAL(10,2),
+    commission DECIMAL(7,2),
+    dep_id INTEGER,
+    FOREIGN KEY (dep_id) REFERENCES department(dep_id)
+);
+
+-- Insert Data into Department Table
+INSERT INTO department(dep_id, dep_name, dep_location)
+VALUES (1, 'cyber', 'france');
+
+-- Insert Data into Employees Table
+INSERT INTO employees(emp_id, emp_name, jobname, manager_id, hire_date, salary, commission, dep_id)
+VALUES (1, 'arsalan', 'sec analyst', 123, '2-3-4', 2000000, 20.12, 1);
+
+-- Insert Data into Salary Grade Table
+INSERT INTO salary_grade(grade, min_salary, max_salary) 
+VALUES (17, 1000000, 3000000);
+
+-- Insert Data into Department Table
+INSERT INTO department(dep_id, dep_name, dep_location)
+VALUES (2, 'cyber', 'france');
+
+-- Insert Data into Employees Table
+INSERT INTO employees(emp_id, emp_name, jobname, manager_id, hire_date, salary, commission, dep_id)
+VALUES (2, 'blaze', 'manager', 68319, '3-3-43', 3000000,
