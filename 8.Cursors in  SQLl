@@ -1,0 +1,59 @@
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    age INT,
+    department VARCHAR(100),
+    email VARCHAR(100),
+    salary DECIMAL(10, 2)
+);
+-- Add new columns to the employees table
+ALTER TABLE employees
+ADD COLUMN email VARCHAR(100),
+ADD COLUMN salary DECIMAL(10, 2);
+
+-- Insert more sample data
+INSERT INTO employees (name, age, department, email, salary) VALUES 
+    ('Alice', 30, 'HR', 'alice@example.com', 50000.00),
+    ('Bob', 35, 'IT', 'bob@example.com', 60000.00),
+    ('Charlie', 25, 'Marketing', 'charlie@example.com', 55000.00),
+    ('David', 40, 'Finance', 'david@example.com', 65000.00),
+    ('Ali', 30, 'IT', 'ali@example.com', 58000.00),
+    ('B', 35, 'IT', 'b@example.com', 59000.00),
+    ('Cha', 25, 'IT', 'cha@example.com', 57000.00),
+    ('Dav', 40, 'Finance', 'dav@example.com', 66000.00),
+    ('A', 41, 'IT', 'a@example.com', 60000.00),
+    ('Bb', 45, 'IT', 'bb@example.com', 62000.00),
+    ('C', 42, 'IT', 'c@example.com', 61000.00),
+    ('D', 40, 'Finance', 'd@example.com', 67000.00),
+    ('Ali', 30, 'IT', 'ali@example.com', 58000.00),
+    ('B', 35, 'IT', 'b@example.com', 59000.00),
+    ('Cha', 25, 'IT', 'cha@example.com', 57000.00),
+    ('Dav', 40, 'Finance', 'dav@example.com', 66000.00);
+
+
+select * from employees;
+
+
+-- Can you write a SQL query using a cursor to calculate the average salary of employees 
+-- in each department and display the department name along with its average salary?
+
+do $$ 
+declare
+depname varchar(30);
+avgsal decimal(10,2);
+cur cursor for
+ select distinct department from employees;
+ 
+begin
+
+ open cur;
+ 
+ loop
+ fetch cur into depname,avgsal;
+ exit when not found;
+ select avg(salary) into avgsal from employees where department = depname;
+ raise notice 'department: % average salary:% ', depname,avgsal;
+ 
+ end loop;
+ 
+end $$
