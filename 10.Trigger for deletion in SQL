@@ -1,0 +1,79 @@
+--tables
+
+-- Create Table 1
+CREATE TABLE Table1 (
+    id serial PRIMARY KEY ,
+    Name VARCHAR(50),
+    Age INT,
+    Occupation VARCHAR(50),
+    City VARCHAR(50)
+);
+
+-- Insert Data into Table 1
+INSERT INTO Table1 (Name, Age, Occupation, City) VALUES
+('John', 30, 'Engineer', 'New York'),
+('Alice', 25, 'Teacher', 'Los Angeles'),
+('Michael', 40, 'Doctor', 'Chicago'),
+('Emily', 35, 'Lawyer', 'San Francisco'),
+('David', 28, 'Software Developer', 'Seattle'),
+('Sarah', 32, 'Architect', 'Boston'),
+('Ryan', 45, 'Manager', 'Houston'),
+('Emma', 27, 'Graphic Designer', 'Miami'),
+('Matthew', 38, 'Accountant', 'Dallas'),
+('Olivia', 29, 'Writer', 'Atlanta');
+
+
+-- Create Table 2
+CREATE TABLE Table2 (
+    ID serial PRIMARY KEY ,
+    Product VARCHAR(50),
+    Price DECIMAL(10,2),
+    Quantity INT,
+    Category VARCHAR(50)
+);
+
+-- Insert Data into Table 2
+INSERT INTO Table2 (Product, Price, Quantity, Category) VALUES
+('Laptop', 1200.00, 10, 'Electronics'),
+('Book', 20.50, 50, 'Literature'),
+('Chair', 75.00, 20, 'Furniture'),
+('Headphones', 100.00, 15, 'Electronics'),
+('Shirt', 30.00, 40, 'Apparel'),
+('Desk', 150.00, 12, 'Furniture'),
+('Camera', 500.00, 8, 'Electronics'),
+('Tablet', 400.00, 18, 'Electronics'),
+('Dress', 50.00, 30, 'Apparel'),
+('Sofa', 800.00, 5, 'Furniture');
+
+
+--// table for saving data
+
+create table logs(name varchar(50),
+				  occupation varchar(50),
+				  deleteon timestamp(6));
+				  
+--Trigger fuction
+
+
+CREATE OR REPLACE FUNCTION deltrigg()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO logs(name, occupation, deleteon)
+    VALUES (OLD.name, OLD.occupation, NOW());
+    RETURN OLD;
+END;
+$$;
+
+ 
+ create or replace trigger triggdelete
+ after delete
+ on table1
+ for each row
+ execute function deltrigg();
+
+--deleting a row
+delete from table1 where id = 3;
+
+select * from logs;
